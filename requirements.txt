@@ -1,0 +1,9 @@
+numpy==1.26.4
+opencv-python==4.9.0.80
+mediapipe==0.10.14
+pygame==2.5.2
+pytest
+black==24.8.0
+isort==5.13.2
+flake8==7.1.1
+pre-commit==3.7.1

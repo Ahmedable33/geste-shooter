@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 120
+extend-ignore =
+    E203  # whitespace before ':' (compatible with black)
+exclude =
+    .venv,
+    build,
+    dist,
+    __pycache__,
+    .git,
+    .pytest_cache
