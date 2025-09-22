@@ -449,6 +449,29 @@ class GameEngine:
         rr = rtxt.get_rect(center=layout["resume_btn"].center)
         self.screen.blit(rtxt, rr)
 
+    def _save_screenshot(self, path: Optional[str] = None) -> str:
+        """Save a screenshot of the current screen contents.
+        Returns the absolute path to the saved file.
+        """
+        # Project root (one level up from gesture_shooter/)
+        root = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+        if path is None:
+            # Default into screenshots/ with timestamped filename
+            ts = time.strftime("%Y%m%d-%H%M%S")
+            rel = os.path.join("screenshots", f"screenshot-{ts}.png")
+        else:
+            rel = path
+        abs_path = rel if os.path.isabs(rel) else os.path.join(root, rel)
+        os.makedirs(os.path.dirname(abs_path), exist_ok=True)
+        try:
+            pygame.image.save(self.screen, abs_path)
+        except Exception:
+            # Fallback: attempt without alpha conversion
+            surf = self.screen.convert()
+            pygame.image.save(surf, abs_path)
+        print(f"Screenshot saved to: {abs_path}")
+        return abs_path
+
     def _apply_difficulty(self, level: str, initial: bool = False):
         cfg = self.difficulty_levels.get(level, self.difficulty_levels["Normal"])
         self.spawn_interval = cfg["spawn_interval"]
@@ -611,6 +634,8 @@ class GameEngine:
                     self._toggle_pause()
                 elif event.key == pygame.K_o:
                     self._toggle_options()
+                elif event.key == pygame.K_F12:
+                    self._save_screenshot()
                 elif event.key == pygame.K_r:
                     self._start_reload()
                 elif event.key == pygame.K_1:

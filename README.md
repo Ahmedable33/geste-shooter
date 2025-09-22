@@ -102,6 +102,19 @@ Si un fichier est manquant ou si l'audio n'est pas disponible, le jeu continue s
   - HUD en jeu: « Audio: Off » signifie que l’audio Pygame n’a pas pu s’initialiser (vérifiez votre serveur audio).
   - « Audio: Muted » quand le son est coupé. « Vol: XX% » quand l’audio est actif.
 
+## Captures
+
+Menu Options (touche `O`):
+
+![Menu Options](screenshots/options-menu.png)
+
+Astuce pour capturer:
+- En jeu, appuyez sur `F12` pour enregistrer un screenshot (dossier `screenshots/`).
+- Ou générez une capture du menu en mode headless:
+  ```bash
+  .venv/bin/python scripts/capture_options_screenshot.py
+  ```
+
 ## Dépannage
 - Webcam non détectée : vérifiez les permissions et que `cv2.VideoCapture(0)` fonctionne (utilisez un autre index de caméra si besoin).
 - Performances : réduisez la résolution de la caméra/écran, fermez les applications lourdes.
